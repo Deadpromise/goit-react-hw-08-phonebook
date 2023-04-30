@@ -4,7 +4,7 @@ import { UserMenu } from '../UserMenu/UserMenu';
 import { AuthNav } from '../AuthNav/AuthNav';
 
 export const AppBar = () => {
-  const isLoggedIn = true;
+  const isLoggedIn = false;
   return (
     <AppHeader>
       <Navigation></Navigation>

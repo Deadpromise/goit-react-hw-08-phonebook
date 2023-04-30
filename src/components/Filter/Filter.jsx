@@ -4,6 +4,7 @@ import React from 'react';
 
 import { useDispatch } from 'react-redux';
 import { setFilter } from 'redux/filterSlice';
+import { FilterContainer } from './Filter.styled';
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -12,21 +13,12 @@ const Filter = () => {
     dispatch(setFilter(inputValue));
   };
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        marginTop: '10px',
-      }}
-    >
+    <FilterContainer>
       <FormLabel>
         Filter
-        <FormInput style={{ width: '100%' }} type="text" onChange={onChange} />
+        <FormInput type="text" onChange={onChange} />
       </FormLabel>
-    </div>
+    </FilterContainer>
   );
 };
 

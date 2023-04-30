@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { addContact } from 'redux/operations';
-import { Form } from './ContactForm.styled';
+import { Form } from '../common/GeneralForm.styled';
 import { CommonButton } from 'components/common/CommonButton.styled';
 import { FormInput } from 'components/common/FormInput.styled';
 import { FormLabel } from 'components/common/FormLabel.styled';

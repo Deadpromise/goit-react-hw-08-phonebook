@@ -9,8 +9,10 @@ const ContactItem = ({ id, name, phone }) => {
   const onDelete = () => dispatch(deleteContact(id));
   return (
     <ContactLi>
-      <ContactInfo>{`${name}:`}</ContactInfo>
-      <ContactInfo>{phone}</ContactInfo>
+      <div>
+        <ContactInfo>{`${name}:`}</ContactInfo>
+        <ContactInfo>{phone}</ContactInfo>
+      </div>
       <CommonButton type="button" onClick={onDelete}>
         DELETE
       </CommonButton>
