@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { AppBar } from './AppBar/AppBar';
 import { AppContainer } from './App.styled';
 import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
@@ -17,6 +18,7 @@ function App() {
 
   return (
     <AppContainer>
+      <AppBar />
       <h1>Phonebook</h1>
       <ContactForm />
       <h2 style={{ fontSize: '30px' }}>Contacts</h2>
