@@ -1,14 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { AppBar } from './AppBar/AppBar';
-import { AppContainer } from './App.styled';
-import ContactForm from './ContactForm/ContactForm';
-import ContactList from './ContactList/ContactList';
-import Filter from './Filter/Filter';
-import { useEffect, lazy } from 'react';
-import { fetchContacts } from 'redux/operations';
-import { getContactIsLoading, getContactError } from '../redux/selectors';
+import { lazy, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout';
+import { useDispatch, useSelector } from 'react-redux';
+import { getIsRefreshing } from 'redux/auth/selectors';
+import { refreshUser } from 'redux/auth/operations';
+import { PrivateRoute } from './PrivateRoute';
+import { RestrictedRoute } from './RestrictedRoute';
 
 const HomePage = lazy(() => import('../pages/Home'));
 const ContactsPage = lazy(() => import('../pages/Contacts'));
@@ -16,38 +13,43 @@ const RegisterPage = lazy(() => import('../pages/Register'));
 const LoginPage = lazy(() => import('../pages/Login'));
 
 function App() {
-  // const dispatch = useDispatch();
-  // const isLoading = useSelector(getContactIsLoading);
-  // const error = useSelector(getContactError);
-  // useEffect(() => {
-  //   dispatch(fetchContacts());
-  // }, [dispatch]);
+  const dispatch = useDispatch();
+  const isRefreshing = useSelector(getIsRefreshing);
 
-  return (
-    // <AppContainer>
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  return isRefreshing ? (
+    <p>Please wait, userdata is refreshing</p>
+  ) : (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
-        <Route path="/contacts" element={<ContactsPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
+          }
+        />
+
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute
+              redirectTo="/contacts"
+              component={<RegisterPage />}
+            />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute redirectTo="/contacts" component={<LoginPage />} />
+          }
+        />
       </Route>
     </Routes>
-    /* <AppBar />
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <h2 style={{ fontSize: '30px' }}>Contacts</h2>
-      <Filter></Filter>
-      {isLoading && !error && (
-        <p style={{ fontSize: '30px' }}>Loading contacts...</p>
-      )}
-      {!isLoading && error && (
-        <p style={{ fontSize: '30px' }}>
-          We are sorry, something go wrong. Error message: "{error}"
-        </p>
-      )}
-      {!isLoading && !error && <ContactList />} */
-    // </AppContainer>
   );
 }
 export default App;

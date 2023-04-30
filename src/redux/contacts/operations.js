@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://6446942aee791e1e29036223.mockapi.io/api/v1';
+// axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
@@ -17,16 +17,17 @@ export const fetchContacts = createAsyncThunk(
 
 export const addContact = createAsyncThunk(
   'contacts/addContact',
-  async ({ name, phone }, thunkAPI) => {
+  async ({ name, number }, thunkAPI) => {
     try {
-      const currentContacts = await axios.get('/contacts', {
-        params: { name, phone },
-      });
-      if (currentContacts.data.length > 0) {
-        const message = `User with name ${name} or number ${phone} is already in contacts`;
+      const currentContacts = await axios.get('/contacts');
+      const checkClone = currentContacts.data.filter(
+        contact => contact.name === name || contact.number === number
+      );
+      if (checkClone.length > 0) {
+        const message = `User with name ${name} or number ${number} is already in contacts`;
         return thunkAPI.rejectWithValue(message);
       }
-      const response = await axios.post('/contacts', { name, phone });
+      const response = await axios.post('/contacts', { name, number });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

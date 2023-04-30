@@ -3,7 +3,7 @@ import { FormLabel } from 'components/common/FormLabel.styled';
 import React from 'react';
 
 import { useDispatch } from 'react-redux';
-import { setFilter } from 'redux/filterSlice';
+import { setFilter } from 'redux/contacts/filterSlice';
 import { FilterContainer } from './Filter.styled';
 
 const Filter = () => {

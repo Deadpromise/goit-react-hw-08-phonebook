@@ -7,10 +7,7 @@ export const NavigatinLink = styled(NavLink)`
   padding: 12px;
   font-weight: 700;
   color: #2a363b;
-  &:active {
+  &.active {
     color: #e84a5f;
-  }
-  &:current {
-    color: blue;
   }
 `;

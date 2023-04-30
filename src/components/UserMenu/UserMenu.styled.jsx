@@ -5,3 +5,7 @@ export const UserMenuContainer = styled.div`
   align-items: center;
   gap: 12px;
 `;
+
+export const UserInfo = styled.p`
+  font-weight: 700;
+`;

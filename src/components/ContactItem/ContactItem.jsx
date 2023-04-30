@@ -2,16 +2,16 @@ import { CommonButton } from 'components/common/CommonButton.styled';
 import { ContactLi, ContactInfo } from './ContactItem.styled';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/operations';
+import { deleteContact } from 'redux/contacts/operations';
 
-const ContactItem = ({ id, name, phone }) => {
+const ContactItem = ({ id, name, number }) => {
   const dispatch = useDispatch();
   const onDelete = () => dispatch(deleteContact(id));
   return (
     <ContactLi>
       <div>
         <ContactInfo>{`${name}:`}</ContactInfo>
-        <ContactInfo>{phone}</ContactInfo>
+        <ContactInfo>{number}</ContactInfo>
       </div>
       <CommonButton type="button" onClick={onDelete}>
         DELETE
@@ -23,6 +23,6 @@ const ContactItem = ({ id, name, phone }) => {
 ContactItem.propTypes = {
   id: PropTypes.string,
   name: PropTypes.string,
-  phone: PropTypes.string,
+  number: PropTypes.string,
 };
 export default ContactItem;

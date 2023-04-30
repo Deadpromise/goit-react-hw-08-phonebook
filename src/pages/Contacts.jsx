@@ -4,8 +4,11 @@ import ContactList from '../components/ContactList/ContactList';
 import Filter from '../components/Filter/Filter';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { fetchContacts } from '../redux/operations';
-import { getContactIsLoading, getContactError } from '../redux/selectors';
+import { fetchContacts } from '../redux/contacts/operations';
+import {
+  getContactIsLoading,
+  getContactError,
+} from '../redux/contacts/selectors';
 
 export default function Contacts() {
   const dispatch = useDispatch();
